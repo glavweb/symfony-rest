@@ -1,0 +1,297 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Fresh\DoctrineEnumBundle\Validator\Constraints\Enum as EnumAssert;
+
+/**
+ * WorkBlock
+ *
+ * @ORM\Table(name="work_blocks")
+ * @ORM\Entity
+ * @Vich\Uploadable
+ */
+class WorkBlock
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @EnumAssert(entity="AppBundle\DBAL\Types\WorkBlockType")
+     * @ORM\Column(name="type", type="WorkBlockType", nullable=false)
+     */
+    private $type;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=80, nullable=true)
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="text", type="text", nullable=true)
+     */
+    private $text;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="anchor", type="string", length=100, nullable=true)
+     */
+    private $anchor;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="weight", type="integer", nullable=true)
+     */
+    private $weight = 100;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     */
+    private $image;
+
+    /**
+     * @ORM\Column(type="datetime", name="updated_at", nullable=true)
+     */
+    private $updatedAt = null;
+
+    /**
+     * @var \AppBundle\Entity\Work
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Work", inversedBy="blocks")
+     */
+    private $work;
+
+    /**
+     * @Vich\UploadableField(mapping="work_block_image", fileNameProperty="image")
+     * @Assert\File(maxSize="4000000")
+     * @Assert\Image(
+     *     mimeTypes = {"image/jpeg", "image/jpg", "image/png"}
+     * )
+     *
+     * @var File
+     */
+    private $imageFile;
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $file
+     */
+    public function setImageFile(File $file = null)
+    {
+        $this->imageFile = $file;
+
+        if ($file) {
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    /**
+     * @return File
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        if (!$this->getId()) {
+            return 'Новый блок';
+        }
+
+        return $this->getId();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set type
+     *
+     * @param integer $type
+     * @return WorkBlock
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return integer 
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return WorkBlock
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set text
+     *
+     * @param string $text
+     * @return WorkBlock
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+
+        return $this;
+    }
+
+    /**
+     * Get text
+     *
+     * @return string 
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * Set anchor
+     *
+     * @param string $anchor
+     * @return WorkBlock
+     */
+    public function setAnchor($anchor)
+    {
+        $this->anchor = $anchor;
+
+        return $this;
+    }
+
+    /**
+     * Get anchor
+     *
+     * @return string 
+     */
+    public function getAnchor()
+    {
+        return $this->anchor;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     * @return WorkBlock
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string 
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return WorkBlock
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set work
+     *
+     * @param \AppBundle\Entity\Work $work
+     * @return WorkBlock
+     */
+    public function setWork(\AppBundle\Entity\Work $work = null)
+    {
+        $this->work = $work;
+
+        return $this;
+    }
+
+    /**
+     * Get work
+     *
+     * @return \AppBundle\Entity\Work 
+     */
+    public function getWork()
+    {
+        return $this->work;
+    }
+}

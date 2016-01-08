@@ -1,0 +1,76 @@
+{% extends 'SonataAdminBundle::standard_layout.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('/js/vendor/bootstrap-maxlength.min.js') }}" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            $('input[maxlength]').maxlength();
+            $('textarea[maxlength]').maxlength();
+        });
+    </script>
+    <script src="{{ asset('/js/vendor/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style>
+        .skin-black .sidebar-form .custom-search-form input {
+            color: #f6f6f6; !important;
+        }
+
+        .sonata-ba-list-field-header-batch {width: 35px}
+
+        /*.sonata-ba-tbody td:first-child {width: 35px}*/
+        .sonata-ba-field-inline-table table {margin-bottom: 5px!important;}
+    </style>
+{% endblock %}
+
+{% block side_bar_after_nav %}
+    <p class="text-center small" style="border-top: 1px solid #444444; padding-top: 10px">
+        <a href="http://glavweb.ru" rel="noreferrer" target="_blank">{{ "made_in_glavweb"|trans([], 'SonataAdminBundle') }}</a></p>
+{% endblock %}
+
+{% block sonata_page_content_nav %}
+    {% if _tab_menu is not empty or _actions is not empty %}
+        <nav class="navbar navbar-default" role="navigation">
+            {% block tab_menu_navbar_header %}
+                {% if _navbar_title is not empty %}
+                    <div class="navbar-header">
+                        <span class="navbar-brand">{{ _navbar_title|raw }}</span>
+                    </div>
+                {% endif %}
+            {% endblock %}
+            <div class="container-fluid">
+                <div class="navbar-left">
+                    {% if _tab_menu is not empty %}
+                        {{ _tab_menu|raw }}
+                    {% endif %}
+                </div>
+
+                {% if _actions|replace({ '<li>': '', '</li>': '' })|trim is not empty %}
+                    {% if _actions|split('<li>')|length > 2 %}
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown sonata-actions">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ 'link_actions'|trans({}, 'SonataAdminBundle') }} <b class="caret"></b></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    {{ _actions|raw }}
+                                </ul>
+                            </li>
+                        </ul>
+                    {% else %}
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown sonata-actions">
+                                {{ _actions|raw }}
+                            </li>
+                        </ul>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </nav>
+    {% endif %}
+{% endblock sonata_page_content_nav %}
+
