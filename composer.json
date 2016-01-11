@@ -58,7 +58,8 @@
         "nelmio/cors-bundle": "~1.3",
         "nelmio/alice": "^2.1",
         "hautelook/alice-bundle": "^1.1",
-        "glavweb/core-bundle": "~0.1"
+        "glavweb/core-bundle": "~0.1",
+        "glavweb/generator-bundle": "~0.1"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "~2.7"
