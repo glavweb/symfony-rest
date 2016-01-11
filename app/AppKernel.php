@@ -38,7 +38,7 @@ class AppKernel extends Kernel
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Fresh\DoctrineEnumBundle\FreshDoctrineEnumBundle(),
             new Glavweb\CoreBundle\GlavwebCoreBundle(),
-            new Glavweb\CoreBundle\GlavwebGeneratorBundle(),
+            new Glavweb\GeneratorBundle\GlavwebGeneratorBundle(),
 
             /* Application */
             new AppBundle\AppBundle(),
