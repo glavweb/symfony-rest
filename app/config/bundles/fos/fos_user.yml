@@ -4,13 +4,11 @@ fos_user:
     user_class:     UserBundle\Entity\User
 
     group:
-        group_class:   UserBundle\Entity\Group
-        group_manager: sonata.user.orm.group_manager
+        group_class: UserBundle\Entity\Group
 
     service:
-        user_manager: sonata.user.orm.user_manager
-        mailer:       fos_user.mailer.twig_swift
+        mailer: fos_user.mailer.twig_swift
 
     from_email:
         address:     noreply@glavweb.ru
-        sender_name: GLAVWEB IS
+        sender_name: GLAVWEB

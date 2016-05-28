@@ -1,7 +1,0 @@
-UserBundle\Entity\User:
-    user-admin:
-        username: admin
-        email: admin@glavweb.ru
-        plainPassword: qwerty
-        enabled: true
-        roles: [ROLE_SUPER_ADMIN]

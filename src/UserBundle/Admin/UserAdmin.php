@@ -2,18 +2,22 @@
 
 namespace UserBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use FOS\UserBundle\Model\UserManagerInterface;
+use Glavweb\CoreBundle\Form\Type\FormStaticControlRawType;
+use Glavweb\RestBundle\Form\SecurityRolesType;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use FOS\UserBundle\Model\UserManagerInterface;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use UserBundle\Entity\User;
 
 /**
  * Class UserAdmin
  * @package UserBundle\Admin
  */
-class UserAdmin extends Admin
+class UserAdmin extends AbstractAdmin
 {
     /**
      * The base route pattern used to generate the routing information
@@ -28,6 +32,39 @@ class UserAdmin extends Admin
      * @var string
      */
     protected $baseRouteName = 'user';
+
+    /**
+     * The number of result to display in the list.
+     *
+     * @var int
+     */
+    protected $maxPerPage = 20;
+
+    /**
+     * Default values to the datagrid.
+     *
+     * @var array
+     */
+    protected $datagridValues = [
+        '_page'       => 1,
+        '_per_page'   => 20,
+    ];
+
+    /**
+     * Predefined per page options.
+     *
+     * @var array
+     */
+    protected $perPageOptions = [20, 40, 60, 120, 180];
+
+    /**
+     * @var array
+     */
+    protected $listModes = [
+        'list' => [
+            'class' => 'fa fa-list fa-fw',
+        ]
+    ];
 
     /**
      * @var UserManagerInterface
@@ -57,8 +94,30 @@ class UserAdmin extends Admin
     {
         // avoid security field to be exported
         return array_filter(parent::getExportFields(), function ($v) {
-            return !in_array($v, array('password', 'salt'));
+            return !in_array($v, ['password', 'salt']);
         });
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configure()
+    {
+        $this->formOptions['translation_domain'] = $this->getTranslationDomain();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureDatagridFilters(DatagridMapper $filterMapper)
+    {
+        $filterMapper
+            ->add('username')
+            ->add('email')
+            ->add('groups')
+            ->add('enabled')
+            ->add('locked')
+        ;
     }
 
     /**
@@ -69,29 +128,122 @@ class UserAdmin extends Admin
         $listMapper
             ->addIdentifier('username')
             ->add('email')
-            ->add('enabled', null, array('editable' => true))
-            ->add('locked', null, array('editable' => true))
-            ->add('createdAt')
+            ->add('groups')
+            ->add('enabled', null, ['editable' => true])
+            ->add('locked', null, ['editable' => true])
         ;
-
-        if ($this->isGranted('ROLE_ALLOWED_TO_SWITCH')) {
-            $listMapper
-                ->add('impersonating', 'string', array('template' => 'SonataUserBundle:Admin:Field/impersonating.html.twig'))
-            ;
-        }
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function configureDatagridFilters(DatagridMapper $filterMapper)
+    protected function configureFormFields(FormMapper $formMapper)
     {
-        $filterMapper
-            ->add('id')
-            ->add('username')
-            ->add('email')
-            ->add('locked')
+        /** @var User $user */
+        $user = $this->getSubject();
+        $authorizationChecker = $this->getConfigurationPool()->getContainer()->get('security.authorization_checker');
+
+        $container      = $this->getConfigurationPool()->getContainer();
+        $uploaderHelper = $container->get('vich_uploader.templating.helper.uploader_helper');
+
+        $avatarPreview = $this->trans('form.avatar_not_loaded');
+        $avatarExists  = $user && $user->getId() && $user->getAvatar();
+        if ($avatarExists) {
+            $avatarPreview = '<img src="' . $uploaderHelper->asset($user, 'avatarFile') . '" style="max-width:150px;">';
+        };
+
+        $formMapper
+            ->tab('User')
+                ->with('General', ['class' => 'col-md-7', 'name' => 'user.general'])->end()
+                ->with('Profile', ['class' => 'col-md-5', 'name' => 'user.profile'])->end()
+            ->end()
         ;
+
+        if ($authorizationChecker->isGranted('ROLE_ADMIN')) {
+            $formMapper
+                ->tab('Security')
+                    ->with('Status', ['class' => 'col-md-6', 'name' => 'security.status'])->end()
+                    ->with('Groups', ['class' => 'col-md-6', 'name' => 'security.groups'])->end()
+                ->end()
+                ->tab('Additional roles')
+                    ->with('Additional roles', ['class' => 'col-md-12', 'name' => 'additional_roles.additional_roles'])->end()
+                ->end()
+            ;
+        }
+
+        $formMapper
+            ->tab('User')
+                ->with('General')
+                    ->add('username')
+                    ->add('email')
+                    ->add('plainPassword', 'text', [
+                        'required' => (!$this->getSubject() || is_null($this->getSubject()->getId())),
+                    ])
+                ->end()
+
+
+                ->with('Profile')
+                    ->add('firstname', null, ['required' => false])
+                    ->add('lastname', null, ['required' => false])
+
+                    ->add('avatarPreview', FormStaticControlRawType::class, [
+                        'data'     => $avatarPreview,
+                        'mapped'   => false,
+                        'required' => false,
+                    ])
+                ->end()
+            ->end()
+        ;
+
+        if ($avatarExists) {
+            $formMapper->tab('User')->with('Profile')->add('avatarRemove', CheckboxType::class, [
+                'mapped'   => false,
+                'required' => false,
+            ])->end()->end();
+        }
+
+        $formMapper
+            ->tab('User')
+                ->with('Profile')
+                    ->add('avatarFile', 'file', [
+                        'label'    => false,
+                        'required' => false
+                    ])
+                ->end()
+            ->end()
+        ;
+
+        if ($authorizationChecker->isGranted('ROLE_ADMIN') && $this->getSubject() && !$this->getSubject()->hasRole('ROLE_SUPER_ADMIN')) {
+            $formMapper
+                ->tab('Security')
+                    ->with('Status')
+                        ->add('locked', null, ['required' => false])
+                        ->add('expired', null, ['required' => false])
+                        ->add('enabled', null, ['required' => false])
+                        ->add('credentialsExpired', null, ['required' => false])
+                    ->end()
+                    ->with('Groups')
+                        ->add('groups', 'sonata_type_model', [
+                            'label'    => false,
+                            'required' => false,
+                            'expanded' => true,
+                            'multiple' => true,
+                            'class'    => 'UserBundle:Group'
+                        ])
+                        ->end()
+                ->end()
+                ->tab('Additional roles')
+                    ->with('Additional roles', ['class' => 'col-md-12 header-hidden'])
+                        ->add('roles', SecurityRolesType::class, [
+                            'label'    => false,
+                            'expanded' => true,
+                            'multiple' => true,
+                            'required' => false,
+                        ])
+                    ->end()
+                ->end()
+            ;
+        }
     }
 
     /**
@@ -102,113 +254,20 @@ class UserAdmin extends Admin
         $authorizationChecker = $this->getConfigurationPool()->getContainer()->get('security.authorization_checker');
 
         $showMapper
-            ->with('General')
+            ->with('General', ['class' => 'col-md-6', 'name' => 'user.general'])
                 ->add('username')
                 ->add('email')
             ->end()
-            ->with('Profile')
+            ->with('Profile', ['class' => 'col-md-6', 'name' => 'user.profile'])
                 ->add('firstname')
                 ->add('lastname')
-                ->add('dateOfBirth')
-                ->add('gender')
-                ->add('locale')
-                ->add('timezone')
-                ->add('phone')
             ->end()
         ;
 
         if ($authorizationChecker->isGranted('ROLE_ADMIN')) {
             $showMapper
-                ->with('Groups')
+                ->with('Groups', ['class' => 'col-md-12', 'name' => 'security.groups'])
                     ->add('groups')
-                ->end()
-            ;
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function configureFormFields(FormMapper $formMapper)
-    {
-        $authorizationChecker = $this->getConfigurationPool()->getContainer()->get('security.authorization_checker');
-        $formMapper
-            ->tab('User')
-                ->with('Profile', array('class' => 'col-md-6'))->end()
-                ->with('General', array('class' => 'col-md-6'))->end()
-            ->end()
-        ;
-
-        if ($authorizationChecker->isGranted('ROLE_ADMIN')) {
-            $formMapper
-                ->tab('Security')
-                    ->with('Status', array('class' => 'col-md-6'))->end()
-                    ->with('Groups', array('class' => 'col-md-6'))->end()
-                ->end()
-                ->tab('Additional roles')
-                    ->with('Additional roles', array('class' => 'col-md-12'))->end()
-                ->end()
-            ;
-        }
-
-        $now = new \DateTime();
-
-        $formMapper
-            ->tab('User')
-                ->with('General')
-                    ->add('username')
-                    ->add('email')
-                    ->add('plainPassword', 'text', array(
-                        'required' => (!$this->getSubject() || is_null($this->getSubject()->getId())),
-                    ))
-                ->end()
-                ->with('Profile')
-                    ->add('firstname', null, array('required' => false))
-                    ->add('lastname', null, array('required' => false))
-                    ->add('phone', null, array('required' => false))
-                    ->add('dateOfBirth', 'sonata_type_date_picker', array(
-                        'years'       => range(1900, $now->format('Y')),
-                        'dp_min_date' => '1-1-1900',
-                        'dp_max_date' => $now->format('c'),
-                        'required'    => false,
-                    ))
-                    ->add('gender', 'sonata_user_gender', array(
-                        'required'           => true,
-                        'translation_domain' => $this->getTranslationDomain(),
-                    ))
-                    ->add('locale', 'locale', array('required' => false))
-                    ->add('timezone', 'timezone', array('required' => false))
-                ->end()
-            ->end()
-        ;
-
-        if ($authorizationChecker->isGranted('ROLE_ADMIN') && $this->getSubject() && !$this->getSubject()->hasRole('ROLE_SUPER_ADMIN')) {
-            $formMapper
-                ->tab('Security')
-                    ->with('Status')
-                        ->add('locked', null, array('required' => false))
-                        ->add('expired', null, array('required' => false))
-                        ->add('enabled', null, array('required' => false))
-                        ->add('credentialsExpired', null, array('required' => false))
-                    ->end()
-                    ->with('Groups')
-                        ->add('groups', 'sonata_type_model', array(
-                            'required' => false,
-                            'expanded' => true,
-                            'multiple' => true,
-                            'class'    => 'UserBundle:Group'
-                        ))
-                        ->end()
-                ->end()
-                ->tab('Additional roles')
-                    ->with('Additional roles')
-                        ->add('realRoles', 'sonata_security_roles', array(
-                            'label'    => false,
-                            'expanded' => true,
-                            'multiple' => true,
-                            'required' => false,
-                        ))
-                    ->end()
                 ->end()
             ;
         }
@@ -219,8 +278,15 @@ class UserAdmin extends Admin
      */
     public function preUpdate($user)
     {
+        /** @var User $user */
         $this->getUserManager()->updateCanonicalFields($user);
         $this->getUserManager()->updatePassword($user);
+
+        $form = $this->getForm();
+        $avatarRemove = $form->has('avatarRemove') && $form->get('avatarRemove')->getData();
+        if ($avatarRemove){
+            $user->setAvatar(null);
+        }
     }
 
     /**

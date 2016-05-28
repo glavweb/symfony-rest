@@ -1,0 +1,2 @@
+include:
+    - ../../../../UserBundle/DataFixtures/ORM/Base/UserData.yml

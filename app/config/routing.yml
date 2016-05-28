@@ -1,11 +1,19 @@
-app:
-    resource: "@AppBundle/Controller/"
+app_default:
+    resource: "@AppBundle/Controller/DefaultController.php"
     type:     annotation
+
+# API's routing
+user_admin:
+    resource: "@UserBundle/Resources/config/routing_admin.yml"
 
 # API's routing
 _api:
     prefix: /api
-    resource: routing_api.yml
+    resource: "@AppBundle/Resources/config/routing_api.yml"
+
+user_api:
+    prefix: /api
+    resource: "@UserBundle/Resources/config/routing_api.yml"
 
 # LiipImagineBundle's routing
 _liip_imagine:
@@ -22,34 +30,17 @@ _sonata_admin:
     prefix: /admin
 
 # FOSUserBundle's routing
-fos_user_security:
-    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
-
-fos_user_profile:
-    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
-    prefix: /profile
-
-fos_user_register:
-    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
-    prefix: /register
-
-fos_user_resetting:
-    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
-    prefix: /resetting
-
-fos_user_change_password:
-    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
-    prefix: /profile
-
-# SonataUserBundle's routing
-sonata_user:
-    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
-    prefix: /admin
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
 # NelmioApiDocBundle's routing
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /api/doc
+
+nelmio_api_swagger:
+    resource: "@NelmioApiDocBundle/Resources/config/swagger_routing.yml"
+    prefix: /api-docs
 
 # Remove trailing slash
 remove_trailing_slash:

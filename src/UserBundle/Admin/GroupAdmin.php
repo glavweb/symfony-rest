@@ -2,17 +2,17 @@
 
 namespace UserBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Glavweb\RestBundle\Form\SecurityRolesType;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
 
 /**
  * Class GroupAdmin
  * @package UserBundle\Admin
  */
-class GroupAdmin extends Admin
+class GroupAdmin extends AbstractAdmin
 {
     /**
      * The base route pattern used to generate the routing information
@@ -31,9 +31,9 @@ class GroupAdmin extends Admin
     /**
      * @var array
      */
-    protected $formOptions = array(
+    protected $formOptions = [
         'validation_groups' => 'Registration',
-    );
+    ];
 
     /**
      * {@inheritdoc}
@@ -41,7 +41,8 @@ class GroupAdmin extends Admin
     public function getNewInstance()
     {
         $class = $this->getClass();
-        return new $class('', array());
+
+        return new $class('', []);
     }
 
     /**
@@ -51,7 +52,6 @@ class GroupAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('name')
-            ->add('roles')
         ;
     }
 
@@ -72,17 +72,19 @@ class GroupAdmin extends Admin
     {
         $formMapper
             ->tab('Group')
-                ->with('General', array('class' => 'col-md-6'))
+                ->with('General', ['class' => 'col-md-6 header-hidden'])
                     ->add('name')
                 ->end()
             ->end()
+
             ->tab('Security')
-                ->with('Roles', array('class' => 'col-md-12'))
-                    ->add('roles', 'sonata_security_roles', array(
+                ->with('Roles', ['class' => 'col-md-12 header-hidden'])
+                    ->add('roles', SecurityRolesType::class, [
+                        'label'    => false,
                         'expanded' => true,
                         'multiple' => true,
                         'required' => false,
-                    ))
+                    ])
                 ->end()
             ->end()
         ;

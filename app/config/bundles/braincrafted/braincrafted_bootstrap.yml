@@ -1,4 +1,3 @@
 braincrafted_bootstrap:
-    less_filter: none
     auto_configure:
         assetic: false
