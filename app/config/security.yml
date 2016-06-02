@@ -25,6 +25,12 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+        api:
+            pattern: ^/api
+            stateless: true
+            simple_preauth:
+                 authenticator: glavweb_core.api_token_authenticator
+
         admin:
             pattern:  /
             context:  user
@@ -64,3 +70,9 @@ security:
        # Change these rules to adapt them to your needs
         - { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
         - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        # API
+        - { path: ^/api/doc, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/sign_in, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/validate_token, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/, role: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -163,6 +163,7 @@ class SecurityApiController extends GlavwebRestController
         $repository = $em->getRepository('UserBundle:User');
 
         // user would be found because if token not valid we get error earlier.
+        /** @var User $user */
         $user = $repository->findOneBy(array('apiToken' => $token));
 
         if (!$user) {
