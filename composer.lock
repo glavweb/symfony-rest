@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ff75b115fe9b41388e9b3177d45fcc8c",
-    "content-hash": "8cd04dc66d47ed4321806adfeb77f097",
+    "hash": "00dd8a8e438531eb0d0216712af19369",
+    "content-hash": "522a96abadd347da9be36c2708c2b50a",
     "packages": [
         {
             "name": "braincrafted/bootstrap-bundle",
@@ -538,16 +538,16 @@
         },
         {
             "name": "doctrine/doctrine-bundle",
-            "version": "1.6.2",
+            "version": "1.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "e9c2ccf573b59b7cea566390f34254fed3c20ed9"
+                "reference": "fd51907c6c76acaa8a5234822a4f901c1500afc1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/e9c2ccf573b59b7cea566390f34254fed3c20ed9",
-                "reference": "e9c2ccf573b59b7cea566390f34254fed3c20ed9",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/fd51907c6c76acaa8a5234822a4f901c1500afc1",
+                "reference": "fd51907c6c76acaa8a5234822a4f901c1500afc1",
                 "shasum": ""
             },
             "require": {
@@ -564,13 +564,14 @@
                 "phpunit/phpunit": "~4",
                 "satooshi/php-coveralls": "~0.6.1",
                 "symfony/phpunit-bridge": "~2.7|~3.0",
+                "symfony/property-info": "~2.8|~3.0",
                 "symfony/validator": "~2.2|~3.0",
                 "symfony/yaml": "~2.2|~3.0",
                 "twig/twig": "~1.10"
             },
             "suggest": {
                 "doctrine/orm": "The Doctrine ORM integration is optional in the bundle.",
-                "symfony/web-profiler-bundle": "to use the data collector"
+                "symfony/web-profiler-bundle": "To use the data collector."
             },
             "type": "symfony-bundle",
             "extra": {
@@ -613,7 +614,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2016-01-10 17:21:44"
+            "time": "2016-04-21 19:55:56"
         },
         {
             "name": "doctrine/doctrine-cache-bundle",
@@ -1567,7 +1568,7 @@
         },
         {
             "name": "glavweb/action-bundle",
-            "version": "0.1.3",
+            "version": "v1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/glavweb/GlavwebActionBundle.git",
@@ -1605,16 +1606,16 @@
         },
         {
             "name": "glavweb/core-bundle",
-            "version": "0.2.0",
+            "version": "v1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/glavweb/GlavwebCoreBundle.git",
-                "reference": "266d0e4b1931ea403fb87c44d737b1b73f3197fd"
+                "reference": "b74f4209e0e2dc829a847012ae9a813de547c1e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glavweb/GlavwebCoreBundle/zipball/266d0e4b1931ea403fb87c44d737b1b73f3197fd",
-                "reference": "266d0e4b1931ea403fb87c44d737b1b73f3197fd",
+                "url": "https://api.github.com/repos/glavweb/GlavwebCoreBundle/zipball/b74f4209e0e2dc829a847012ae9a813de547c1e2",
+                "reference": "b74f4209e0e2dc829a847012ae9a813de547c1e2",
                 "shasum": ""
             },
             "require": {
@@ -1641,20 +1642,20 @@
                 }
             ],
             "description": "Symfony GlavwebCoreBundle",
-            "time": "2016-04-27 02:53:53"
+            "time": "2016-06-02 06:30:35"
         },
         {
             "name": "glavweb/datagrid-bundle",
-            "version": "dev-master",
+            "version": "1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/glavweb/GlavwebDatagridBundle.git",
-                "reference": "46b40a89dc53d631e376395715b568c76cbd568d"
+                "reference": "4a98f1a848a387673dbbfd22bf9e8719d7df7c08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glavweb/GlavwebDatagridBundle/zipball/46b40a89dc53d631e376395715b568c76cbd568d",
-                "reference": "46b40a89dc53d631e376395715b568c76cbd568d",
+                "url": "https://api.github.com/repos/glavweb/GlavwebDatagridBundle/zipball/4a98f1a848a387673dbbfd22bf9e8719d7df7c08",
+                "reference": "4a98f1a848a387673dbbfd22bf9e8719d7df7c08",
                 "shasum": ""
             },
             "require": {
@@ -1688,24 +1689,24 @@
                 }
             ],
             "description": "GLAVWEB DatagridBundle",
-            "time": "2016-05-23 06:23:40"
+            "time": "2016-06-02 10:49:57"
         },
         {
             "name": "glavweb/rest-bundle",
-            "version": "dev-master",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/glavweb/GlavwebRestBundle.git",
-                "reference": "754549982df09772c4949cf0d0ef9870d5a2658c"
+                "reference": "bfd57183596b52f045df61369ff3ebbb1239e7e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glavweb/GlavwebRestBundle/zipball/754549982df09772c4949cf0d0ef9870d5a2658c",
-                "reference": "754549982df09772c4949cf0d0ef9870d5a2658c",
+                "url": "https://api.github.com/repos/glavweb/GlavwebRestBundle/zipball/bfd57183596b52f045df61369ff3ebbb1239e7e6",
+                "reference": "bfd57183596b52f045df61369ff3ebbb1239e7e6",
                 "shasum": ""
             },
             "require": {
-                "glavweb/action-bundle": "~0.1",
+                "glavweb/action-bundle": "~1.0",
                 "symfony/console": "~2.3|~3.0",
                 "symfony/form": "^2.3.5|~3.0",
                 "symfony/http-foundation": "~2.3|~3.0",
@@ -1730,7 +1731,7 @@
                 }
             ],
             "description": "Symfony GlavwebRestBundle",
-            "time": "2016-05-23 10:29:21"
+            "time": "2016-06-02 11:57:54"
         },
         {
             "name": "guzzle/guzzle",
@@ -4382,20 +4383,21 @@
         },
         {
             "name": "sonata-project/core-bundle",
-            "version": "3.0.0",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataCoreBundle.git",
-                "reference": "bf2b5bb35b0bf12e1987d3255688915ce1e9a686"
+                "reference": "66e9d21f9b38cce824e3c43adf39b3f08b062505"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/bf2b5bb35b0bf12e1987d3255688915ce1e9a686",
-                "reference": "bf2b5bb35b0bf12e1987d3255688915ce1e9a686",
+                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/66e9d21f9b38cce824e3c43adf39b3f08b062505",
+                "reference": "66e9d21f9b38cce824e3c43adf39b3f08b062505",
                 "shasum": ""
             },
             "require": {
                 "cocur/slugify": "^1.4 || ^2.0",
+                "php": "^5.3 || ^7.0",
                 "symfony/config": "^2.3 || ^3.0",
                 "symfony/form": "^2.3 || ^3.0",
                 "symfony/http-foundation": "^2.3 || ^3.0",
@@ -4409,9 +4411,9 @@
                 "doctrine/phpcr-odm": "^1.0",
                 "friendsofsymfony/rest-bundle": "^1.1 || ^2.0",
                 "jackalope/jackalope-doctrine-dbal": "^1.0",
-                "jms/serializer-bundle": "~0.11 || ^1.0",
-                "matthiasnoback/symfony-config-test": "~0.4 || ^1.0",
-                "matthiasnoback/symfony-dependency-injection-test": "~0.7",
+                "jms/serializer-bundle": "0.11 - 0.13 || ^1.0",
+                "matthiasnoback/symfony-config-test": "^0.4 || ^1.0",
+                "matthiasnoback/symfony-dependency-injection-test": "^0.7",
                 "sensio/framework-extra-bundle": "^2.3 || ^3.0",
                 "sllh/php-cs-fixer-styleci-bridge": "^2.0",
                 "sonata-project/exporter": "^1.3",
@@ -4447,7 +4449,7 @@
             "keywords": [
                 "sonata"
             ],
-            "time": "2016-05-06 10:59:25"
+            "time": "2016-06-01 12:33:04"
         },
         {
             "name": "sonata-project/datagrid-bundle",
@@ -4455,12 +4457,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDatagridBundle.git",
-                "reference": "e7c3af8454aedbfb8efc266bea771d22f40d5f47"
+                "reference": "311afa1feb0e0867f0584a90005c063a59d60617"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDatagridBundle/zipball/e7c3af8454aedbfb8efc266bea771d22f40d5f47",
-                "reference": "e7c3af8454aedbfb8efc266bea771d22f40d5f47",
+                "url": "https://api.github.com/repos/sonata-project/SonataDatagridBundle/zipball/311afa1feb0e0867f0584a90005c063a59d60617",
+                "reference": "311afa1feb0e0867f0584a90005c063a59d60617",
                 "shasum": ""
             },
             "require": {
@@ -4505,7 +4507,7 @@
                 "datagrid",
                 "sonata"
             ],
-            "time": "2016-05-28 00:57:38"
+            "time": "2016-06-02 11:03:55"
         },
         {
             "name": "sonata-project/doctrine-orm-admin-bundle",
@@ -5408,16 +5410,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.24.0",
+            "version": "v1.24.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8"
+                "reference": "3566d311a92aae4deec6e48682dc5a4528c4a512"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8",
-                "reference": "3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/3566d311a92aae4deec6e48682dc5a4528c4a512",
+                "reference": "3566d311a92aae4deec6e48682dc5a4528c4a512",
                 "shasum": ""
             },
             "require": {
@@ -5465,49 +5467,59 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2016-01-25 21:22:18"
+            "time": "2016-05-30 09:11:59"
         },
         {
             "name": "vich/uploader-bundle",
-            "version": "1.0.1",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dustin10/VichUploaderBundle.git",
-                "reference": "85300145a610b3a087a1f5de5e2d31dce4556eab"
+                "reference": "f803b16f419af72d498753324051f283384871ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dustin10/VichUploaderBundle/zipball/85300145a610b3a087a1f5de5e2d31dce4556eab",
-                "reference": "85300145a610b3a087a1f5de5e2d31dce4556eab",
+                "url": "https://api.github.com/repos/dustin10/VichUploaderBundle/zipball/f803b16f419af72d498753324051f283384871ef",
+                "reference": "f803b16f419af72d498753324051f283384871ef",
                 "shasum": ""
             },
             "require": {
                 "jms/metadata": "~1.5",
                 "ocramius/proxy-manager": "~1.0|~2.0",
                 "php": "~5.5|~7.0",
-                "symfony/finder": "~2.0|~3.0",
+                "symfony/dependency-injection": "~2.3|~3.0",
+                "symfony/finder": "~2.2|~3.0",
                 "symfony/framework-bundle": "~2.3|~3.0",
-                "symfony/property-access": "~2.4|~3.0"
+                "symfony/property-access": "~2.5|~3.0"
             },
             "require-dev": {
                 "doctrine/doctrine-bundle": "~1.6",
                 "doctrine/mongodb-odm": "~1.0",
-                "doctrine/orm": "~2.2,>=2.2.3",
+                "doctrine/orm": "^2.2.3",
                 "ext-sqlite3": "*",
                 "knplabs/knp-gaufrette-bundle": "~0.3",
                 "matthiasnoback/symfony-dependency-injection-test": "~0.7",
-                "mikey179/vfsstream": "~1.0",
+                "mikey179/vfsstream": "~1.2",
                 "oneup/flysystem-bundle": "~1.0",
-                "phpunit/phpunit": "~4.0"
+                "phpunit/phpunit": "~4.0",
+                "symfony/browser-kit": "~2.3|~3.0",
+                "symfony/css-selector": "~2.3|~3.0",
+                "symfony/dom-crawler": "~2.3|~3.0",
+                "symfony/form": "~2.3|~3.0",
+                "symfony/proxy-manager-bridge": "~2.3|~3.0",
+                "symfony/twig-bridge": "~2.3.10|~3.0",
+                "symfony/twig-bundle": "~2.3|~3.0",
+                "symfony/validator": "~2.3|~3.0",
+                "symfony/yaml": "^2.0.5|~3.0"
             },
             "suggest": {
-                "doctrine/doctrine-bundle": "*",
+                "doctrine/doctrine-bundle": "~1.6",
                 "doctrine/mongodb-odm-bundle": "*",
-                "doctrine/orm": ">=2.2.3",
+                "doctrine/orm": "^2.2.3",
                 "doctrine/phpcr-odm": "~1.0",
-                "knplabs/knp-gaufrette-bundle": "*",
-                "symfony/yaml": "@stable",
-                "willdurand/propel-eventdispatcher-bundle": ">=1.2"
+                "knplabs/knp-gaufrette-bundle": "~0.3",
+                "symfony/yaml": "^2.0.5",
+                "willdurand/propel-eventdispatcher-bundle": "~1.2"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -5536,7 +5548,7 @@
                 "file uploads",
                 "upload"
             ],
-            "time": "2016-03-18 11:21:31"
+            "time": "2016-05-29 16:30:28"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
@@ -5789,16 +5801,16 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v3.0.6",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "3231629ff97abccd60f93ff900accfb5b39c8200"
+                "reference": "f5e7cdc9b5cd3f7d9b0228692cd6ec5736c3b074"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/3231629ff97abccd60f93ff900accfb5b39c8200",
-                "reference": "3231629ff97abccd60f93ff900accfb5b39c8200",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/f5e7cdc9b5cd3f7d9b0228692cd6ec5736c3b074",
+                "reference": "f5e7cdc9b5cd3f7d9b0228692cd6ec5736c3b074",
                 "shasum": ""
             },
             "require": {
@@ -5810,7 +5822,7 @@
             "type": "symfony-bridge",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -5840,16 +5852,14 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-            "time": "2016-04-12 18:09:53"
+            "time": "2016-04-12 18:27:47"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "sonata-project/datagrid-bundle": 20,
-        "friendsofsymfony/user-bundle": 20,
-        "glavweb/rest-bundle": 20,
-        "glavweb/datagrid-bundle": 20
+        "friendsofsymfony/user-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

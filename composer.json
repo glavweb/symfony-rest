@@ -45,7 +45,7 @@
         "glavweb/core-bundle": "~1.0",
         "glavweb/rest-bundle": "~1.0",
         "glavweb/datagrid-bundle": "~1.0",
-        "glavweb/action-bundle": "~0.1"
+        "glavweb/action-bundle": "~1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
