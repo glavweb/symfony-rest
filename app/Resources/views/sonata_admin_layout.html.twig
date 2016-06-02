@@ -1,5 +1,9 @@
 {% extends 'SonataAdminBundle::standard_layout.html.twig' %}
 
+{% block meta_tags %}
+    <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}"/>
+{% endblock %}
+
 {% block javascripts %}
     {{ parent() }}
 
