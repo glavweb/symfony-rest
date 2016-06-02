@@ -2,6 +2,7 @@
 /app/config/parameters.yml
 /build/
 /phpunit.xml
+/src/Glavweb
 /var/*
 !/var/cache
 /var/cache/*
