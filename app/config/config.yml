@@ -26,9 +26,6 @@ imports:
     - { resource: bundles/nelmio/nelmio_api_doc.yml }
     - { resource: bundles/nelmio/nelmio_cors.yml }
 
-    # JMS bundles
-    - { resource: bundles/jms/jms_serializer.yml }
-
     # Glavweb bundles
     - { resource: bundles/glavweb/glavweb_datagrid.yml }
 
@@ -47,7 +44,7 @@ framework:
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: true }
-    #serializer:      { enable_annotations: true }
+    serializer:      { enable_annotations: true }
     templating:
         engines: ['twig']
     default_locale:  "%locale%"
@@ -68,7 +65,7 @@ twig:
     form_themes:
         - 'SonataCoreBundle:Form:datepicker.html.twig'
         - 'GlavwebCoreBundle:Form:fields.html.twig'
-        - 'GlavwebRestBundle:Form:fields.html.twig'
+        - 'GlavwebSecurityBundle:Form:fields.html.twig'
 
     globals:
         made_in_link: "%made_in_link%"

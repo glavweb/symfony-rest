@@ -2,7 +2,8 @@
 /app/config/parameters.yml
 /build/
 /phpunit.xml
-/src/Glavweb
+/generates/
+/src/Glavweb/
 /var/*
 !/var/cache
 /var/cache/*
@@ -21,5 +22,13 @@
 !/web/uploads/content/
 /web/uploads/content/*
 !/web/uploads/content/.gitkeep
+!/web/uploads/users/
+/web/uploads/users/*
+!/web/uploads/users/.gitkeep
+/tests/web/uploads/*
+!/tests/web/uploads/.gitkeep
+!/tests/web/uploads/users/
+/tests/web/uploads/users/*
+!/tests/web/uploads/users/.gitkeep
 /web/media/
 /composer.phar

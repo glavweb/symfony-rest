@@ -1,2 +1,27 @@
-include:
-    - ../../../../UserBundle/DataFixtures/ORM/Base/UserData.yml
+UserBundle\Entity\Group:
+    group_admin:
+        __construct: [Admin]
+        roles:
+            - ROLE_SUPER_ADMIN
+            - ROLE_ADMIN
+
+    group_moderator:
+        __construct: [Moderator]
+        roles:
+            - ROLE_MODERATOR
+
+    group_user:
+        __construct: [User]
+        roles:
+            - ROLE_USER
+
+UserBundle\Entity\User:
+    user-1:
+        username: admin
+        firstname: John
+        lastname: Doe
+        email: john-doe@testmail.com
+        plainPassword: weloveglavweb
+        enabled: true
+        roles: [ROLE_SUPER_ADMIN]
+        groups: ["@group_admin"]

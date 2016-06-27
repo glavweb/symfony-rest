@@ -4,5 +4,7 @@ parameters:
 #    parameter_name: value
 
 services:
-    jms_serializer.naming_strategy:
-        class: 'JMS\Serializer\Naming\IdenticalPropertyNamingStrategy'
+    datetime_normalizer:
+        class: Symfony\Component\Serializer\Normalizer\DateTimeNormalizer
+        tags:
+            - { name: serializer.normalizer }

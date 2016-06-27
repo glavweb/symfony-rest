@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the "Symfony REST Edition" package.
+ *
+ * (c) GLAVWEB <info@glavweb.ru>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace UserBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -12,7 +21,8 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Class User
- * @package UserBundle\Entity
+ *
+ * @author Andrey Nilov <nilov@glavweb.ru>
  *
  * @ORM\Table(name="users")
  * @ORM\Entity

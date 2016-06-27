@@ -1,8 +1,22 @@
 <?php
 
+/*
+ * This file is part of the "Symfony REST Edition" package.
+ *
+ * (c) GLAVWEB <info@glavweb.ru>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
+/**
+ * Class AppKernel
+ *
+ * @author Andrey Nilov <nilov@glavweb.ru>
+ */
 class AppKernel extends Kernel
 {
     public function registerBundles()
@@ -28,7 +42,6 @@ class AppKernel extends Kernel
             new Sonata\IntlBundle\SonataIntlBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new FOS\RestBundle\FOSRestBundle(),
-            new JMS\SerializerBundle\JMSSerializerBundle(),
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new Nelmio\CorsBundle\NelmioCorsBundle(),
             new Hautelook\AliceBundle\HautelookAliceBundle(),
@@ -38,6 +51,7 @@ class AppKernel extends Kernel
             new Liip\FunctionalTestBundle\LiipFunctionalTestBundle(),
             new Fresh\DoctrineEnumBundle\FreshDoctrineEnumBundle(),
             new Glavweb\CoreBundle\GlavwebCoreBundle(),
+            new Glavweb\SecurityBundle\GlavwebSecurityBundle(),
             new Glavweb\ActionBundle\GlavwebActionBundle(),
             new Glavweb\RestBundle\GlavwebRestBundle(),
             new Glavweb\DatagridBundle\GlavwebDatagridBundle(),
