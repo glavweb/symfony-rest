@@ -50,9 +50,7 @@ class SecurityApiController extends GlavwebRestController
      * })
      *
      * @Rest\RequestParam(name="username", requirements="[\w\-]+", nullable=false, description="Username")
-     * @Rest\RequestParam(name="password",                     nullable=false, description="Password")
-     *
-     * @Rest\View(serializerEnableMaxDepthChecks=true)
+     * @Rest\RequestParam(name="password", nullable=false, description="Password")
      *
      * @param ParamFetcherInterface $paramFetcher
      * @return View
@@ -124,7 +122,6 @@ class SecurityApiController extends GlavwebRestController
      *     "_format": "json|xml"
      * })
      *
-     * @return View
      * @throws \RuntimeException
      */
     public function deleteSignOutAction()
