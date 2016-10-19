@@ -26,6 +26,9 @@ imports:
     - { resource: bundles/nelmio/nelmio_api_doc.yml }
     - { resource: bundles/nelmio/nelmio_cors.yml }
 
+    # Hautelook bundles
+    - { resource: bundles/hautelook/hautelook_alice.yml }
+
     # Glavweb bundles
     - { resource: bundles/glavweb/glavweb_datagrid.yml }
 
