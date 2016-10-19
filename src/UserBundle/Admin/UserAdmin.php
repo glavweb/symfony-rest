@@ -284,9 +284,11 @@ class UserAdmin extends AbstractAdmin
         $this->getUserManager()->updatePassword($user);
 
         $form = $this->getForm();
-        $avatarRemove = $form->has('avatarRemove') && $form->get('avatarRemove')->getData();
-        if ($avatarRemove){
-            $user->setAvatar(null);
+
+        $isAvatarRemove = $form->has('avatarRemove') && $form->get('avatarRemove')->getData();
+        if ($isAvatarRemove){
+            $uploaderHandler = $this->getConfigurationPool()->getContainer()->get('vich_uploader.upload_handler');
+            $uploaderHandler->remove($user, 'avatarFile');
         }
     }
 
